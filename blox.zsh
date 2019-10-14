@@ -27,22 +27,20 @@ source "$__BLOX_ROOT/src/blocks/pyenv.zsh"
 source "$__BLOX_ROOT/src/blocks/symbol.zsh"
 source "$__BLOX_ROOT/src/blocks/time.zsh"
 source "$__BLOX_ROOT/src/blocks/virtualenv.zsh"
-source "$__BLOX_ROOT/src/blocks/awsprofile.zsh"
 
 source "$__BLOX_ROOT/src/title.zsh"
 source "$__BLOX_ROOT/src/segments.zsh"
 source "$__BLOX_ROOT/src/render.zsh"
-source "$__BLOX_ROOT/src/hooks.zsh"
 
 # ---------------------------------------------
 
 BLOX_CONF__BLOCK_PREFIX="${BLOX_CONF__BLOCK_PREFIX:-[}"
 BLOX_CONF__BLOCK_SUFFIX="${BLOX_CONF__BLOCK_SUFFIX:-]}"
 
+
 BLOX_CONF__BLOCK_SEPARATOR="${BLOX_CONF__BLOCK_SEPARATOR:-" "}"
 
 BLOX_CONF__ONELINE="${BLOX_CONF__ONELINE:-false}"
-BLOX_CONF__UNIFIED_PROMPT="${BLOX_CONF__UNIFIED_PROMPT:-false}"
 
 # Allow setting null/empty values (#6)
 [[ -z "${BLOX_CONF__PROMPT_PREFIX+1}" ]] \
@@ -76,12 +74,12 @@ prompt_blox_setup() {
   autoload -U add-zsh-hook
   autoload -Uz vcs_info
 
-  # Setup builtin hookd
   add-zsh-hook precmd blox_hook__render
   add-zsh-hook precmd blox_hook__title
 
-  # Setup hooks for blocks
-  blox_helper__setup_hooks
+  # See ./src/blocks/exec_time.zsh
+  add-zsh-hook preexec blox_block__exec_time_hook__preexec
+  add-zsh-hook precmd blox_block__exec_time_hook__precmd
 
   return 0
 }

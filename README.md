@@ -2,7 +2,7 @@
 
 > Clean, modular ZSH theme
 
-![](./.github/terminal.png)
+![](./media/terminal.png)
 
 Blox is a minimal and fast ZSH theme that shows you what you need. It consists of blocks, and you
 can play with the order and change everything; it comes with some pre-defined blocks, but you can
@@ -58,7 +58,7 @@ antibody bundle yardnsm/blox-zsh-theme
 
 ## The prompt
 
-![](./.github/terminal-sliced.png)
+![](./media/terminal-sliced.png)
 
 The main idea of this theme is dividing the prompt into blocks. The blocks are modular and they
 could be arranged and modified. Each block has its options, which can also be customized. In
@@ -76,7 +76,6 @@ The following sections describe the built-in blocks and their customizing option
 | `BLOX_CONF__BLOCK_SEPARATOR` | `' '` | The character used to separate blocks. |
 | `BLOX_CONF__PROMPT_PREFIX` | `'\n'` | The prompt's prefix (the default adds a newline between prompts). |
 | `BLOX_CONF__ONELINE` | `false` | **When setting to `true`, the lower segments will be disabled** |
-| `BLOX_CONF__UNIFIED_PROMPT` | `false` | Set the to `true`, the entire rendered result will be assigned to `$PROMPT`. Otherwise, it'll render the upper segments separately (we recommend leaving it as `false` as it may solve some resizing issue, see [#2](https://github.com/yardnsm/blox-zsh-theme/issues/2)) |
 
 ### Built-in blocks
 
@@ -184,14 +183,6 @@ Display the last command's execute time.
 | `BLOX_BLOCK__EXEC_TIME_MIN_ELAPSED` | `5` | The minimum number of seconds for showing the block |
 | `BLOX_BLOCK__EXEC_TIME_PERSIST` | `false` | If enabled, the timestamp wont be cleared up until next execution. Can be useful when needed to re-draw the prompt. |
 | `BLOX_BLOCK__EXEC_TIME_COLOR` | `'yellow'` | The block's color |
-
-#### `awsprofile`
-
-Displays the current AWS profile (from the `$AWS_PROFILE` env variable).
-
-| Variable | Default | Meaning |
-| :------- | :------ | :------ |
-| `BLOX_BLOCK__AWSPROFILE_COLOR` | `'172' (orange)` | This block's color |
 
 ---
 

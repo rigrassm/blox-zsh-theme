@@ -15,9 +15,9 @@ function blox_helper__build_block() {
 
   local result=""
 
-  result+="%F{${color}}"
-  result+="${prefix}${contents}${suffix}";
-  result+="%f"
+#  result+="{${color}}"
+  result+="${prefix}%F{${color}}${contents}%{$reset_color%}${suffix}";
+ # result+="%{$reset_color%}"
 
   echo -n "$result"
 }
