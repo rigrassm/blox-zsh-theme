@@ -22,7 +22,7 @@ function blox_block__pyenv() {
   local python_version=$(blox_block__pyenv_helper__get_version)
 
   if [[ ! -z "${python_version}" ]]; then
-    blox_helper__build_block \
+    blox_helper__build_block_color \
       "${BLOX_BLOCK__PYENV_COLOR}" \
       "py:${python_version}"
   fi

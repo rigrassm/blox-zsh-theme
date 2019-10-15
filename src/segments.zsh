@@ -15,6 +15,8 @@ BLOX_SEG__UPPER_RIGHT=${BLOX_SEG__UPPER_RIGHT:-$__BLOX_SEG_DEFAULT__UPPER_RIGHT}
 BLOX_SEG__LOWER_LEFT=${BLOX_SEG__LOWER_LEFT:-$__BLOX_SEG_DEFAULT__LOWER_LEFT}
 BLOX_SEG__LOWER_RIGHT=${BLOX_SEG__LOWER_RIGHT:-$__BLOX_SEG_DEFAULT__LOWER_RIGHT}
 
+BLOX_BLOCK__SYMBOL_SEPARATOR="${BLOX_BLOCK__SYMBOL_SEPARATOR:-$BLOX_CONF__BLOCK_SEPARATOR}"
+
 # ---------------------------------------------
 # Helper functions
 
@@ -42,7 +44,13 @@ function blox_helper__render_segment() {
   for block in ${blocks[@]}; do
     contents="$(blox_helper__render_block ${block})"
 
-    if [[ -n "$contents" ]]; then
+    # Allow for the symbol block to have it's own separator if desired
+    # This is useful when you wish to have no separator for boxes while
+    # maintaining spacing between your symbol and the prompt.
+    if [[ ${block} == "symbol" ]]; then
+        segment+="${BLOX_BLOCK__SYMBOL_SEPARATOR}${contents}"
+
+    elif [[ -n "$contents" ]]; then
       [[ -n "$segment" ]] \
         && segment+="$BLOX_CONF__BLOCK_SEPARATOR"
 

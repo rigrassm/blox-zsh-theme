@@ -30,7 +30,7 @@ function blox_block__nodejs() {
   local node_version=$(blox_block__nodejs_helper__get_version)
 
   if [[ ! -z "${node_version}" ]]; then
-    blox_helper__build_block \
+    blox_helper__build_block_color_color \
       "${BLOX_BLOCK__NODEJS_COLOR}" \
       "${BLOX_BLOCK__NODEJS_SYMBOL} ${node_version:1}"
   fi
