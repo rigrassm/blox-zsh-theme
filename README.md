@@ -220,7 +220,7 @@ The function name should match the naming convention of `blox_block__<name>`. Fo
 
 ```shell
 function blox_block__helloworld() {
-  echo "$( `blox_helper__build_block_color` "white" "hello world")
+  echo "$( blox_helper__build_block_color "white" "hello world")
 }
 ```
 
