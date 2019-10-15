@@ -1,6 +1,6 @@
 # Blox
 
-> Clean, modular ZSH theme
+> Clean, Boxy ZSH theme based on https://github.com/yardnsm/blox-zsh-theme
 
 ![](./media/terminal.png)
 
@@ -20,19 +20,19 @@ zsh framework / plugin manager.
 Simply add the following into your `~/.zshrc`
 
 ```console
-antigen bundle yardnsm/blox-zsh-theme
+antigen bundle rigrassm/blox-zsh-theme
 ```
 
 ### For zgen users
 
 ```console
-zgen load yardnsm/blox-zsh-theme
+zgen load rigrassm/blox-zsh-theme
 ```
 
 ### For antibody users
 
 ```console
-antibody bundle yardnsm/blox-zsh-theme
+antibody bundle rigrassm/blox-zsh-theme
 ```
 
 ### For oh-my-zsh users
@@ -60,12 +60,10 @@ antibody bundle yardnsm/blox-zsh-theme
 
 ![](./media/terminal-sliced.png)
 
-The main idea of this theme is dividing the prompt into blocks. The blocks are modular and they
-could be arranged and modified. Each block has its options, which can also be customized. In
-addition, each block has its own helper function so you can use them when you're building your own
-blocks.
+The main idea of this theme is dividing the prompt into Boxes. The boxes are modular and they
+could be arranged and modified. Each box has its options, which can also be customized. The plugin provides the necessary helper functions to construct your custom box.
 
-The following sections describe the built-in blocks and their customizing options.
+The following sections describe the built-in boxes and their customizing options.
 
 ### Core options
 
@@ -193,7 +191,7 @@ Display the last command's execute time.
 
 The prompt consists of 4 segments: upper left, upper right, lower left and lower right. You can set
 the value of each segment by simply change it's value. The value of a segment is an array of strings
-representing the block's name.
+representing the boxes name.
 
 :warning: **Note:** You can make the prompt oneline instead of multiline by changing the value of
 `BLOX_CONF__ONELINE`. **This will disable the lower segments!**
@@ -216,14 +214,13 @@ representing the block's name.
 | `blox_helper__color_string` | Applies the specified color to given string | `color` `string` | `blox_helper__color_string "#d2b877" "This string is gonna be gold"` |
 
 #### Creating your box
-A block is just a simple function that `echo`s the result. Some built-in blocks have their own helper
-functions you can use when building your blocks (check the source code for more info).
+A box is just a simple function that echo's a result into one of `blox_helper__build_block_color` or `blox_helper__build_block_nocolor` depending on if your boxes content will have it's colors set dynamically or just using a pre-configured color option. 
 
 The function name should match the naming convention of `blox_block__<name>`. For example:
 
 ```shell
 function blox_block__helloworld() {
-  echo "$( blox_helper__build_block_color "white" "hello world")
+  echo "$( `blox_helper__build_block_color` "white" "hello world")
 }
 ```
 
@@ -240,4 +237,4 @@ Now you have a "hello world" block in the lower right segment of your prompt! So
 
 ## License
 
-MIT © [Yarden Sod-Moriah](http://yardnsm.net/)
+MIT © [Ricky Grassmuck](https://github.com/rigrassm/blox-zsh-theme)
