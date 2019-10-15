@@ -99,6 +99,7 @@ The prompt's symbol.
 | `BLOX_BLOCK__SYMBOL_SYMBOL` | `'❯'` | The symbol |
 | `BLOX_BLOCK__SYMBOL_EXIT_SYMBOL` | `'❯'` | The symbol when last command didn't exit with `0` |
 | `BLOX_BLOCK__SYMBOL_ALTERNATE` | `'◇'` | Alternate symbol (used as `PROMPT2`) |
+| `BLOX_BLOCK__SYMBOL_SEPARATOR` | `BLOX_CONF__BLOCK_SEPARATOR` | Use a different separator then what is used for separating standard Boxes |
 
 #### `git`
 
@@ -204,8 +205,17 @@ representing the block's name.
 | `BLOX_SEG__LOWER_LEFT` | `( symbol )` |
 | `BLOX_SEG__LOWER_RIGHT` | `( )` |
 
-### Creating blocks
 
+### Creating boxes
+
+#### Helper Functions
+| Function | Args | Desc |Usage |
+| :------- | :------ | :------ | :------ |
+| `blox_helper__build_block_color` | Builds a box with the contents set to the `color` param passed to it | `color` `string` | `blox_helper__build_block_color "#d2b877" "This string is gonna be gold and inside a box"` |
+| `blox_helper__build_block_nocolor` | Just builds a box without setting the content color | `string` | `blox_helper__build_block_nocolor "This string is gonna be inside a box"` |
+| `blox_helper__color_string` | Applies the specified color to given string | `color` `string` | `blox_helper__color_string "#d2b877" "This string is gonna be gold"` |
+
+#### Creating your box
 A block is just a simple function that `echo`s the result. Some built-in blocks have their own helper
 functions you can use when building your blocks (check the source code for more info).
 
@@ -213,7 +223,7 @@ The function name should match the naming convention of `blox_block__<name>`. Fo
 
 ```shell
 function blox_block__helloworld() {
-  echo "${BLOX_CONF__BLOCK_PREFIX}hello world${BLOX_CONF__BLOCK_SUFFIX}"
+  echo "$( blox_helper__build_block_color "white" "hello world")
 }
 ```
 
@@ -225,10 +235,6 @@ BLOX_SEG__LOWER_RIGHT+=( helloworld )
 
 Now you have a "hello world" block in the lower right segment of your prompt! So useful.
 
-:warning: **Note:** there may be some spacing issues in the upper segments when using multiline mode.
-To solve this, try wrapping variables (especially color variables, e.g. `$fg[...]`) within `%{…%}`
-(see [this link](http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Visual-effects) for
-more details).
 
 ---
 
