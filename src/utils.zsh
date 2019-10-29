@@ -11,7 +11,7 @@ function blox_helper__color_string() {
   local -r color="$1"
   local -r contents="$2"
 
-  local colorized="%F{${color}}${contents}%{${reset_color}%}";
+  local colorized="%F{${color}%}${contents}%{${reset_color}%}";
   
   echo -n "${colorized}";
 
