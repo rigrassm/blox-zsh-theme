@@ -7,7 +7,7 @@ BLOX_BLOCK__PYENV_COLOR="${BLOX_BLOCK__PYENV_COLOR:-green}"
 # Helper functions
 
 function blox_block__pyenv_helper__get_version() {
-  echo -n "$(pyenv version-name 2>/dev/null)"
+  print_content "$(pyenv version-name 2>/dev/null)"
 }
 
 # ---------------------------------------------

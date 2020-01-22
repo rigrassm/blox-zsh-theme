@@ -8,7 +8,7 @@ BLOX_BLOCK__NODEJS_COLOR="${BLOX_BLOCK__NODEJS_COLOR:-green}"
 # Helper functions
 
 function blox_block__nodejs_helper__get_version() {
-  echo -n "$(node -v 2>/dev/null)"
+  print_content "$(node -v 2>/dev/null)"
 }
 
 # ---------------------------------------------

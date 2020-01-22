@@ -26,11 +26,11 @@ function blox_helper__render_block() {
   local block_func="blox_block__${block}"
 
   if command -v "$block_func" &> /dev/null; then
-    echo "$(${block_func})"
+    print_content "$(${block_func})"
   else
     # Support for older versions of blox, where the block render function name
     # would be the same as the block name itself.
-    echo $(${block})
+    print_content $(${block})
   fi
 }
 
@@ -38,7 +38,7 @@ function blox_helper__render_block() {
 function blox_helper__render_segment() {
 
   # For some reason, arrays cannot be assigned in typeset expressions in older versions of zsh.
-  local blocks; blocks=( `echo $@` )
+  local blocks; blocks=( `print_content $@` )
   local segment=""
 
   for block in ${blocks[@]}; do
@@ -58,5 +58,5 @@ function blox_helper__render_segment() {
     fi
   done
 
-  echo $segment
+  print_content $segment
 }

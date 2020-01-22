@@ -19,10 +19,10 @@ function blox_block__exec_time_helper__humen_time() {
   local hours=$(( tmp / 60 / 60 % 24 ))
   local minutes=$(( tmp / 60 % 60 ))
   local seconds=$(( tmp % 60 ))
-  (( $days > 0 )) && echo -n "${days}d "
-  (( $hours > 0 )) && echo -n "${hours}h "
-  (( $minutes > 0 )) && echo -n "${minutes}m "
-  echo "${seconds}s"
+  (( $days > 0 )) && print_content "${days}d "
+  (( $hours > 0 )) && print_content "${hours}h "
+  (( $minutes > 0 )) && print_content "${minutes}m "
+  print_content "${seconds}s"
 }
 
 # ---------------------------------------------
@@ -55,5 +55,5 @@ function blox_block__exec_time() {
   result+="$(blox_block__exec_time_helper__humen_time $elapsed)";
   result+="%{$reset_color%}"
 
-  echo $result
+  print_content $result
 }

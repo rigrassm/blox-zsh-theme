@@ -11,5 +11,5 @@ function blox_block__cwd() {
   local cwd="%($(( $BLOX_BLOCK__CWD_TRUNC + 1 ))~|.../%$BLOX_BLOCK__CWD_TRUNC~|%~)"
   result="$( blox_helper__color_string ${BLOX_BLOCK__CWD_COLOR} ${cwd} )"
 
-  echo ${result}
+  print_content ${result}
 }

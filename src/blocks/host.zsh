@@ -35,6 +35,6 @@ function blox_block__host() {
   local -r result="$(blox_helper__build_block_nocolor ${content}) "
 
   if [[ $result != "" ]]; then
-    echo "${result}"
+    print_content "${result}"
   fi
 }

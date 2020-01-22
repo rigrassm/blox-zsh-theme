@@ -6,14 +6,19 @@ function blox_helper__exists() {
   command -v "$1" &> /dev/null
 }
 
+# Use this function to print your contents. 
+function print_content() {
+  print -rn "${1}"
+}
+
 # Simple function to produce a colorized string
 function blox_helper__color_string() {
   local -r color="$1"
   local -r contents="$2"
 
-  local colorized="%F{${color}%}${contents}%{${reset_color}%}";
+  local colorized="%F{${color}%}${contents}%f";
   
-  echo -n "${colorized}";
+  print_content "${colorized}";
 
 }
 
@@ -26,7 +31,7 @@ function blox_helper__wrap_block_content() {
 
   local -r result="${prefix} ${contents} ${suffix}";
 
-  echo -n "$result"
+  print_content "$result"
 }
 
 # Use this when you just need to build a block with a single color for the blocks contents
@@ -35,7 +40,7 @@ function blox_helper__build_block_color() {
   local -r contents="$2"
   local colorized="$( blox_helper__color_string ${color} ${contents} )";
   local result="$( blox_helper__wrap_block_content ${colorized} )";
-  echo -n "${result}"
+  print_content "${result}"
 }
 
 # Use this function when your block will handle the color coding itself and
@@ -45,5 +50,5 @@ function blox_helper__build_block_nocolor() {
 
   local -r result="$( blox_helper__wrap_block_content ${contents} )";
 
-  echo -n "$result"
+  print_content "$result"
 }
