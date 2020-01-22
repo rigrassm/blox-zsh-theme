@@ -15,6 +15,7 @@ BLOX_SEG__UPPER_RIGHT=${BLOX_SEG__UPPER_RIGHT:-$__BLOX_SEG_DEFAULT__UPPER_RIGHT}
 BLOX_SEG__LOWER_LEFT=${BLOX_SEG__LOWER_LEFT:-$__BLOX_SEG_DEFAULT__LOWER_LEFT}
 BLOX_SEG__LOWER_RIGHT=${BLOX_SEG__LOWER_RIGHT:-$__BLOX_SEG_DEFAULT__LOWER_RIGHT}
 
+BLOX_BLOCK__BLOCK_NO_SEPARATOR=()
 BLOX_BLOCK__SYMBOL_SEPARATOR="${BLOX_BLOCK__SYMBOL_SEPARATOR:-$BLOX_CONF__BLOCK_SEPARATOR}"
 
 # ---------------------------------------------
@@ -38,24 +39,24 @@ function blox_helper__render_block() {
 function blox_helper__render_segment() {
 
   # For some reason, arrays cannot be assigned in typeset expressions in older versions of zsh.
-  local blocks; blocks=( `print_content $@` )
+  local blocks=(); 
+  blocks+=( `echo -n $@` )
   local segment=""
 
   for block in ${blocks[@]}; do
-    contents="$(blox_helper__render_block ${block})"
-
-    # Allow for the symbol block to have it's own separator if desired
-    # This is useful when you wish to have no separator for boxes while
-    # maintaining spacing between your symbol and the prompt.
-    if [[ ${block} == "symbol" ]]; then
-        segment+="${BLOX_BLOCK__SYMBOL_SEPARATOR}${contents}"
-
-    elif [[ -n "$contents" ]]; then
-      [[ -n "$segment" ]] \
-        && segment+="$BLOX_CONF__BLOCK_SEPARATOR"
-
-      segment+="$contents"
-    fi
+      contents="$(blox_helper__render_block ${block})"
+      if [[ ${block} == "symbol" ]]; then
+	  # Check if our symbol is the only thing rendered and if so, don't use the separator
+          if [[ ${segment} == "" ]]; then
+              segment+="${contents}"
+          else
+	      segment+="${BLOX_BLOCK__SYMBOL_SEPARATOR}${contents}"
+          fi
+      elif [[ ${BLOX_BLOCK__BLOCK_NO_BLOCK_SEPARATOR[(ie)$block]} -le ${#BLOX_BLOCK__BLOCK_NO_BLOCK_SEPARATOR} ]]; then
+          segment+="${contents}"
+      else 
+	  segment+="${BLOX_CONF__BLOCK_SEPARATOR}${contents}"
+      fi
   done
 
   print_content $segment

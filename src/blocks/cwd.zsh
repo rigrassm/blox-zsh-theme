@@ -4,6 +4,8 @@
 BLOX_BLOCK__CWD_COLOR="${BLOX_BLOCK__CWD_COLOR:-blue}"
 BLOX_BLOCK__CWD_TRUNC="${BLOX_BLOCK__CWD_TRUNC:-3}"
 
+# Disable prefixing a block separator for this module
+no_box_separator "cwd"
 # ---------------------------------------------
 
 function blox_block__cwd() {

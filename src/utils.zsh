@@ -1,6 +1,11 @@
 # ---------------------------------------------
 # Utilities functions
 
+# Disable using a box separator for a module
+function no_box_separator() {
+	BLOX_BLOCK__BLOCK_NO_SEPARATOR+=("${1}") 
+}
+
 # Check if command exists
 function blox_helper__exists() {
   command -v "$1" &> /dev/null
